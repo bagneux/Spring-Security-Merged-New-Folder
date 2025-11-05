@@ -48,6 +48,8 @@ public class AdminController {
         return "redirect:/admin/users";
     }
 
+
+
     // Показать форму редактирования
     @GetMapping("/user-update/{id}")
     public String showUpdateForm(@PathVariable Long id, Model model) {
@@ -60,14 +62,10 @@ public class AdminController {
         return "admin-user-update";
     }
 
-    // Обработка обновления
-    @PostMapping("/user-update")
-    public String updateUser(@ModelAttribute("user") User formUser,
-                             @RequestParam(value = "roleIds", required = false) List<Long> roleIds,
-                             @RequestParam(value = "password", required = false) String password) {
-        Set<Role> roles = roleIds != null ? new HashSet<>(roleRepository.findAllById(roleIds)) : null;
 
-        userService.updateUser(formUser.getId(), formUser.getUsername(), password, roles);
+    @PostMapping("/user-update")
+    public String updateUser(User user) {
+        userService.updateUser(user.getId(), user.getUsername(), user.getPassword(), user.getRoles());
         return "redirect:/admin/users";
     }
 

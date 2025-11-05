@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService implements UserDetailsService, UserServiceInterface {
 
 
     private final UserRepository userRepository;
@@ -58,7 +58,7 @@ public class UserService implements UserDetailsService {
 
     //CRUD методы
 
-
+    @Override
     public User saveUser(String username, String rawPassword, Set<Role> roles) {
         User user = new User();
         user.setUsername(username);
@@ -66,24 +66,27 @@ public class UserService implements UserDetailsService {
         user.setRoles(roles);
         return userRepository.save(user);
     }
-
+    @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
+    @Override
     public User findById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
+    @Override
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 
-
+    @Override
     public User findByUsername(String name) {
        return userRepository.findByUsername(name);
     }
 
+    @Override
     public User updateUser(Long id, String username, String rawPassword, Set<Role> roles) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (!optionalUser.isPresent()) {

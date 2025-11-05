@@ -19,7 +19,7 @@
     <br/>
 
     <label for="roles">Roles</label>
-    <select multiple th:field="*{roles}" id="roles" name="roleIds">
+    <select multiple th:field="*{roles}" id="roles" name="role">
         <option th:each="role : ${allRoles}" th:value="${role.id}" th:text="${role.name}"
                 th:selected="${user.roles.contains(role)}"></option>
     </select>
