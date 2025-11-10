@@ -7,6 +7,7 @@ import ru.kata.spring.boot_security.demo.entities.Role;
 import ru.kata.spring.boot_security.demo.entities.User;
 import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.service.UserServiceInterface;
 
 import java.util.HashSet;
 import java.util.List;
@@ -16,10 +17,10 @@ import java.util.Set;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final UserService userService;
+    private final UserServiceInterface userService;
     private final RoleRepository roleRepository; // нужно для получения ролей
 
-    public AdminController(UserService userService, RoleRepository roleRepository) {
+    public AdminController(UserServiceInterface userService, RoleRepository roleRepository) {
         this.userService = userService;
         this.roleRepository = roleRepository;
     }
